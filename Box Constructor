@@ -1,0 +1,54 @@
+#include<iostream>
+using namespace std;
+
+class Box
+{
+    private:
+	   int l,b,w;
+	public:
+	    void getInfo()
+		{
+			cout<<l<<b<<w<<endl;
+		}
+		void setInfo(int l,int b,int w)
+		{
+			this->l=l;
+			this->b=b;
+			this->w=w;
+		}
+		Box() //Default constructor
+		{
+			this->l=1;
+			this->b=1;
+			this->w=1;
+		}
+		Box(int x,int y,int z) //Parameterised Constructor
+		{
+			l=x;
+			b=y;
+			w=z;
+		}
+		Box(const Box & obj) //Copy Constructor
+		{
+			l=obj.l;
+			b=obj.b;
+			w=obj.w;
+		}
+		~Box()
+		{
+			cout<<"Destructor is Called"<<endl;
+		}		
+};
+int main()
+{
+	Box b1;
+	b1.getInfo();
+	Box b2(4,5,6);
+	b2.getInfo();
+	Box b3=b2;
+	b3.getInfo();
+	b3.setInfo(9,9,9);
+	b3.getInfo();
+	Box b4(b3);
+	b4.getInfo();
+}
