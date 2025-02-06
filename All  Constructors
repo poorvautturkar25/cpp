@@ -1,0 +1,58 @@
+#include<iostream>
+using namespace std;
+
+class Demo
+{
+	private:
+		int *p;
+    public:
+//    	void getInfo() //getter
+//    	{
+//    		cout<<*p<<endl;
+//		}
+//		void setInfo(int v)  //setter
+//		{
+//			*this->p=v;
+//		} 
+        Demo& getInfo()  //Chaining
+        {
+        	cout<<"Value is :"<<*p<<endl;
+        	return *this;
+		}
+		Demo& setInfo(int x)
+        {
+            *p=x;
+        	return *this;
+		}
+		Demo(int x) //Parameterised Constructor
+		{
+			p=new int(x);
+		}
+		Demo(const Demo & obj)  //ShallowCopy Constructor
+		{
+			p=obj.p;
+		}
+//		Demo(const Demo &obj) //Deep Copy
+//		{
+//			p=new int(*(obj.p));
+//		}
+		~Demo() //Destructor
+		{
+			delete p;
+			cout<<"Destructor is called"<<endl;
+		}
+		
+};
+int   main()
+{
+	Demo d1(111);
+	d1.getInfo();
+	Demo d2(d1);
+	d2.getInfo() ;
+	d2.setInfo(222);
+	d2.getInfo().setInfo(999).getInfo();
+	d2.~Demo();
+	d1.getInfo(); //Returns garbage value because destructor is called first..
+	
+	return 0;
+}
