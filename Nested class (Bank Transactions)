@@ -1,0 +1,66 @@
+#include<iostream>
+using namespace std;
+
+class BankAccount {
+    private:
+        string holder_name;
+        int account_no;
+        static int balance;
+
+    public:
+        void get_info() {
+            cout << endl << endl << "---Account Details---\n";
+            cout << "Holder Name :" << holder_name << endl;
+            cout << "Account No  :" << account_no << endl;
+            cout << "Balance     :" << balance << endl;
+        }
+
+        BankAccount(string name, int an, int bal) {
+            holder_name = name;
+            account_no = an;
+            balance = bal;
+        }
+
+        class Transaction {
+            private:
+                string type;
+                int amount;
+
+            public:
+                void get_tran_details() {
+                    cout << type << " : " << amount << endl;
+                }
+
+                Transaction(string typ, int amt) {
+                    type = typ;
+                    amount = amt;
+
+                    if (type == "Deposit") {
+                        BankAccount::balance = BankAccount::balance + amt;
+                    }
+                    else if (type == "Withdraw") {
+                        if (amt <= BankAccount::balance) {
+                            BankAccount::balance = BankAccount::balance - amt;
+                        }
+                        else {
+                            cout << "Not Sufficient Balance to Withdraw\n";
+                        }
+                    }
+                }
+        };
+};
+
+int BankAccount::balance;
+
+int main() {
+    BankAccount a1("Poorva", 123456, 3000);
+    a1.get_info();
+
+    BankAccount::Transaction t1("Deposit", 2000);
+    a1.get_info();
+    t1.get_tran_details();
+
+    BankAccount::Transaction t2("Withdraw", 5000);
+    a1.get_info();
+    t2.get_tran_details();
+}
