@@ -1,0 +1,39 @@
+#include<iostream>
+using namespace std;
+
+class A
+{
+   public:
+   	int a,b;
+   	void get()
+   	{
+   	    cout<<"\nEnter two Numbers:";
+		   cin>>a>>b;	
+	}
+};
+class B:public A
+{
+   public:
+   	
+	void sum()
+	{
+		cout<<"\nAddition is :"<<a+b;
+	}
+    
+};
+class C:public B
+{ 
+    public:
+	void subtraction()
+   	{
+   	    cout<<"\nSubtraction is:"<<a-b;	
+	}
+};
+int main()
+{
+	C obj;
+	obj.get();
+	obj.subtraction(); 
+	obj.sum();
+	return 0;
+}
