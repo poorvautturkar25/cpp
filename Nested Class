@@ -1,0 +1,51 @@
+#include<iostream>
+using namespace std;
+
+class Outer{
+	private:
+		static int x;
+		
+	public:
+		Outer& get_info_outer(){
+			cout << "value of x = " << x << endl;
+			return *this;
+		}
+		
+		Outer& set_info_outer(int a){
+			x = a;
+			return *this;
+		}
+		
+		class Inner{
+			private:
+				int y;
+				
+			public:
+				Inner& get_info_inner(){
+					cout << "value of y = " << y << endl;
+					cout << "value of x = " << x << endl;
+					return *this;
+				}
+				
+				Inner& set_info_inner(int b){
+					y = b;
+					x = b;
+					return *this;
+				}
+		};
+};
+
+int Outer::x;
+
+int main(){
+	
+	Outer c1;
+	c1.set_info_outer(10).get_info_outer();
+	
+	Outer :: Inner c2;
+	c2.set_info_inner(20).get_info_inner();
+	
+	
+	
+	return 0;
+}
